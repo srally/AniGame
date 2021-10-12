@@ -8,19 +8,41 @@ import com.badlogic.gdx.utils.ScreenUtils;
 public class Game4 extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
+	Texture pc;
+	float x, y, dx, dy, wid, hei;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("bu.png");
+		pc = new Texture("bc.jfif");
+		x = 2;
+		y = 2;
+		dx = 12;
+		dy = 13;
 	}
 
 	@Override
 	public void render () {
-		ScreenUtils.clear(1, 0, 0, 1);
+		ScreenUtils.clear(0, 1, 1, 1);
+		x+=dx;
+		y+=dy;
+		if(x>wid||x<0){
+			dx = -dx;
+		}
+		if(y>hei||y<0){
+			dy = -dy;
+		}
 		batch.begin();
-		batch.draw(img, 0, 0);
+		batch.draw(img, x, y);
+		batch.draw(pc, 1400, 500);
 		batch.end();
+	}
+
+	@Override
+	public void resize(int w, int h){
+		wid = w;
+		hei = h;
 	}
 	
 	@Override
