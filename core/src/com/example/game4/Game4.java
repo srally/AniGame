@@ -2,6 +2,7 @@ package com.example.game4;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -9,6 +10,7 @@ public class Game4 extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
 	Texture pc;
+	Sprite sprite;
 	float x, y, dx, dy, wid, hei;
 	
 	@Override
@@ -16,6 +18,7 @@ public class Game4 extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		img = new Texture("bu.png");
 		pc = new Texture("bc.jfif");
+		sprite = new Sprite(pc);
 		x = 2;
 		y = 2;
 		dx = 12;
@@ -35,7 +38,7 @@ public class Game4 extends ApplicationAdapter {
 		}
 		batch.begin();
 		batch.draw(img, x, y);
-		batch.draw(pc, 1400, 500);
+		batch.draw(sprite, 1400, 500);
 		batch.end();
 	}
 
