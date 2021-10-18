@@ -54,7 +54,6 @@ public class Game4 extends ApplicationAdapter {
 			dy = -dy;
 		}
 		batch.begin();
-		//batch.draw(img, x, y);
 		batch.draw(sprite, 1400, 500);
 		batch.draw(animation.getKeyFrame(et, true), x, y);
 		batch.end();
