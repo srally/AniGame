@@ -4,14 +4,21 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 public class Game4 extends ApplicationAdapter {
 	SpriteBatch batch;
-	Texture img;
-	Texture pc;
+	Texture img, pc;
+	TextureRegion[] frames;
 	Sprite sprite;
-	float x, y, dx, dy, wid, hei;
+	Animation<TextureRegion> animation;
+	float x, y, dx, dy, wid, hei, et;
 	
 	@Override
 	public void create () {
@@ -23,10 +30,20 @@ public class Game4 extends ApplicationAdapter {
 		y = 2;
 		dx = 12;
 		dy = 13;
+		TextureRegion[][] tmp = TextureRegion.split(img,90,90);
+		frames = new TextureRegion[4];
+		int in = 0;
+		for(int i=0; i<2; i++){
+			for(int j=0; j<2; j++){
+				frames[in++] = tmp[j][i];
+			}
+		}
+		animation = new Animation(1f/4f, frames);
 	}
 
 	@Override
 	public void render () {
+		et += Gdx.graphics.getDeltaTime();
 		ScreenUtils.clear(0, 1, 1, 1);
 		x+=dx;
 		y+=dy;
@@ -37,8 +54,9 @@ public class Game4 extends ApplicationAdapter {
 			dy = -dy;
 		}
 		batch.begin();
-		batch.draw(img, x, y);
+		//batch.draw(img, x, y);
 		batch.draw(sprite, 1400, 500);
+		batch.draw(animation.getKeyFrame(et, true), x, y);
 		batch.end();
 	}
 
